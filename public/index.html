@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="iconoo.png" />
+	<title>Truth or Dare</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js">
+	</script>
+</head>
+
+<body>
+	<button onclick="spicier()" id="spicyfier">Picante</button>
+  <button onclick="secretF()" id="secret-button">Aver</button>
+  <div id="start-page">
+    <div id="title"><span style="color:#7678ED">Verdad</span> o <span style="color:#FB3640">Reto</span></div>
+    <button onclick="startgame()" id="start">Empezar</button>
+    <ul>
+      <li>El botón de la esquina izquierda controla si jugar con retos "picantes" permitidos.</li>
+      <li>Cada tarjeta tiene en una esquina el número de shots/tragos en caso de no hacer el reto o responder la pregunta.</li>
+      <li>También aparecerá un fueguito en la esquina si la tarjeta en sí es picante. </li>
+      <li>Las tarjetas azules son verdades, las rojas son retos. </li>
+    </ul>
+    <div style="position:absolute;top:110vh;">&nbsp;</div>
+    <br><br>
+    <footer style="text-align:center;width:100%">© Todos los derechos reservados.<br>2022<br>@facuavc</footer>
+  </div>
+  <div id="card" style="display:none;">
+    <div id="shot-container">
+      <div id="shots"></div>
+      <img src="shot-glass-icon-13.png">
+      <div></div>
+      <img src="fire.png" id="fire" style="display:none;">
+    </div>
+    <div id="prompt"></div>
+    <p id="spicy" style="display:none;">spicy:</p>
+    <p id="truth" style="display:none;">truth</p>
+    <button onclick="something()" id="siguiente">Siguiente</button>
+  </div>
+</body>
+<script src="retos.js"></script>
+<script>
+
+  var spicyArr = [];
+  var spicy = 1;
+
+  for (var i=0; i<retos.length;i++){
+    if(retos[i].spicy){
+      spicyArr.push(i);
+    }
+  }
+
+  var posibles = [];
+  var selected;
+  for (var i=0; i<retos.length;i++){
+    posibles.push(i);
+  }
+
+
+
+  var spicier = function(){
+    if(spicy){
+      for(var i=0;i<spicyArr.length;i++){
+        for(var j=0;j<posibles.length;j++){
+          if(posibles[j]==spicyArr[i]){
+            posibles.splice(j,1);
+          }
+        }
+      }
+      spicy=0;
+      document.getElementById("spicyfier").textContent="No Picante";
+      $("#spicyfier").css({"color":"black","background-color":"white"});
+    }else{
+      posibles = posibles.concat(spicyArr);
+      posibles.sort((a, b) => a - b);
+      spicy=1;
+      document.getElementById("spicyfier").textContent="Picante";
+      $("#spicyfier").css({"color":"white","background-color":"black"});
+    }
+  }
+
+
+  var something = function(){
+    if(posibles.length==0){
+      document.getElementById("prompt").textContent = "Que vividos LPM, ya se acabaron todos los retos, gracias."
+      document.getElementById("shots").textContent = "Terminen el alcohol porfas";
+      $("#shot-container").css("grid-template-columns","35ch 1fr");
+      $("#shots").css("font-size","1.5");
+      $("#fire").hide();
+      $("#card").css({"background-color":"#fb3640","color":"#f7f7ff"});
+      $("#siguiente").attr("onclick","window.location.reload();");
+      document.getElementById("siguiente").textContent="Repetir";
+      return
+    }
+    selected = posibles[Math.floor(Math.random() * posibles.length)];
+
+    document.getElementById("prompt").textContent = retos[selected].actualprompt;
+
+    document.getElementById("shots").textContent = retos[selected].shots;
+    if(retos[selected].shots>=10){
+      
+      $("#shot-container").css("grid-template-columns","4ch 1fr 1fr 1fr");
+    }else{
+      
+      $("#shot-container").css("grid-template-columns","2ch 1fr 1fr 1fr");
+    }
+
+    document.getElementById("spicy").textContent = "Spicy: "+retos[selected].spicy;
+    if(retos[selected].spicy){
+      $("#fire").show();
+    }else{
+      $("#fire").hide();
+    }
+
+    if(retos[selected].dare){
+      document.getElementById("truth").textContent = "dare";
+      $("#card").css({"background-color":"#fb3640","color":"#f7f7ff"});
+    }else{
+      document.getElementById("truth").textContent = "truth";
+      $("#card").css({"background-color":"#7678ed","color":"#f7f7ff"});
+    }
+
+
+    posibles.splice(posibles.indexOf(selected),1);
+    console.log(posibles.length);
+  }
+
+
+  var startgame = function(){
+    something();
+    $("#card").show();
+    $("#start-page").hide();
+  }
+
+  var isSecret = true;
+  var secretA=[75];
+  var secretF = function(){
+    if(!isSecret){
+      document.getElementById("prompt").textContent = "Ese botón es para hacer trampita. No lo reveles wachín. Si ya lo sabías y no funcionó, cagate por metido.";
+      return
+    }
+    if(secretA.length<=0){
+      something();
+      return
+    }
+    selected = secretA[Math.floor(Math.random() * secretA.length)];
+
+    document.getElementById("prompt").textContent = retos[selected].actualprompt;
+
+    document.getElementById("shots").textContent = retos[selected].shots;
+    if(retos[selected].shots>=10){
+      
+      $("#shot-container").css("grid-template-columns","4ch 1fr 1fr 1fr");
+    }else{
+      
+      $("#shot-container").css("grid-template-columns","2ch 1fr 1fr 1fr");
+    }
+
+    document.getElementById("spicy").textContent = "Spicy: "+retos[selected].spicy;
+    if(retos[selected].spicy){
+      $("#fire").show();
+    }else{
+      $("#fire").hide();
+    }
+
+    if(retos[selected].dare){
+      document.getElementById("truth").textContent = "dare";
+      $("#card").css({"background-color":"#fb3640","color":"#f7f7ff"});
+    }else{
+      document.getElementById("truth").textContent = "truth";
+      $("#card").css({"background-color":"#7678ed","color":"#f7f7ff"});
+    }
+
+
+    posibles.splice(posibles.indexOf(selected),1);
+    secretA.splice(secretA.indexOf(selected),1);
+  }
+</script>
+</html>

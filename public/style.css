@@ -1,0 +1,164 @@
+#shots{
+  display:inline;
+  line-height: 8vh;
+  text-align:center;
+  vertical-align: middle;
+  font-size: 2.5em;
+}
+img{
+  height:8vh;
+}
+#shot-container{
+  display: grid;
+  grid-template-columns: 4ch 1fr 1fr 1fr;
+}
+#spicyfier{
+  font-size:1.2em;
+  padding:0.3em;
+  color:white;
+  background-color:black;
+}
+#secret-button{
+  border:none;
+  position:absolute;
+  left:30vw;
+  color:rgba(255,255,255,0);
+  width:30vh;
+  height:5vh;
+  background-color:rgba(255,255,255,0);
+}
+#start-page{
+  position:relative;
+}
+#start-page ul{
+  position: absolute;
+  left: 47%;
+  transform: translateX(-50%);
+  top: 51vh;
+  font-size: 1.2em;
+  width: 80%;
+  margin-bottom: 10vh;
+}
+#start-page li:not(:last-child) { 
+   margin-bottom: 10px;  
+}
+#title{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:3em;
+  text-align:center;
+  width:100%;
+  top:30vh;
+}
+#start{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size:1.5em;
+  text-align:center;
+  width:40%;
+  top:45vh;
+}
+#card{
+  border: 2px solid black;
+  border-radius: 2%;
+  width: 85%;
+  height: 83vh;
+  margin-left: 1.75%;
+  margin-right: 2.5%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  padding: 5%;
+}
+#siguiente{
+  position: absolute;
+  top: 100%;
+  right: 10%;
+  font-size: 1.3em;
+  padding: 0.5vh;
+}
+#prompt{
+  position: absolute;
+  width: 80%;
+  top: 50%;
+  font-size: 2em;
+}
+#fire{
+  position: relative;
+  margin-right:0;
+  margin-left:auto;
+}
+
+@media only screen and (max-width: 600px) {
+  #shots{
+    display:inline;
+    line-height: 8vh;
+    text-align:center;
+    vertical-align: middle;
+    font-size: 2.5em;
+  }
+  img{
+    height:8vh;
+  }
+  #shot-container{
+    display: grid;
+    grid-template-columns: 4ch 1fr 1fr 1fr;
+  }
+  #spicyfier{
+    font-size:1.2em;
+    padding:0.3em;
+    color:white;
+    background-color:black;
+  }
+  #start-page{
+    position:relative;
+  }
+  #title{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size:3em;
+    text-align:center;
+    width:100%;
+    top:30vh;
+  }
+  #start{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size:1.5em;
+    text-align:center;
+    width:40%;
+    top:45vh;
+  }
+  #card{
+    border: 2px solid black;
+    border-radius: 2%;
+    width: 85%;
+    height: 83vh;
+    margin-left: 1.75%;
+    margin-right: 2.5%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+    padding: 5%;
+  }
+  #siguiente{
+    position: absolute;
+    top: 90%;
+    right: 10%;
+    font-size: 1.3em;
+    padding: 0.5vh;
+  }
+  #prompt{
+    position: absolute;
+    width: 80%;
+    top: 30%;
+    font-size: 2em;
+  }
+  #fire{
+    position: relative;
+    margin-right:0;
+    margin-left:auto;
+  }
+}
