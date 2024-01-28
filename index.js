@@ -29,4 +29,10 @@ app.use(express.static(__dirname + '/public'))
    .use(cors())
    .use(cookieParser());
 
-app.listen(3000);
+const PORT = process.env.PORT || 3030;
+
+// your code
+
+app.listen(PORT, () => {
+  console.log(`server started on port ${PORT}`);
+});
